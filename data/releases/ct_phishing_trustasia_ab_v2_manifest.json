@@ -1,0 +1,100 @@
+{
+  "cohort_version": "trustasia_ab_2025_v2",
+  "columns": [
+    "record_id",
+    "dataset_split",
+    "cohort_version",
+    "hostname",
+    "label",
+    "collection_date",
+    "ct_timestamp",
+    "certificate_not_before",
+    "certificate_not_after",
+    "issuer",
+    "san_count",
+    "is_wildcard",
+    "certificate_fingerprint",
+    "source_log",
+    "source_archive",
+    "log_entry_id",
+    "entry_type",
+    "hostname_length",
+    "digit_count",
+    "hyphen_count",
+    "character_entropy",
+    "subdomain_depth",
+    "metadata_schema_version",
+    "certificate_extension_count",
+    "issuer_attribute_count",
+    "public_key_size",
+    "san_wildcard_count",
+    "san_idna_count",
+    "san_distinct_final_label_count",
+    "san_max_length",
+    "san_mean_length",
+    "san_max_subdomain_depth",
+    "san_mean_subdomain_depth",
+    "san_max_entropy",
+    "san_mean_entropy",
+    "has_basic_constraints",
+    "basic_constraints_ca",
+    "has_key_usage",
+    "key_usage_digital_signature",
+    "key_usage_key_encipherment",
+    "key_usage_key_agreement",
+    "has_extended_key_usage",
+    "extended_key_usage_count",
+    "eku_server_auth",
+    "eku_client_auth",
+    "eku_code_signing",
+    "has_authority_key_identifier",
+    "has_subject_key_identifier",
+    "has_certificate_policies",
+    "certificate_policy_count",
+    "has_crl_distribution_points",
+    "crl_distribution_point_count",
+    "has_authority_information_access",
+    "aia_ocsp_count",
+    "aia_ca_issuers_count",
+    "has_tls_feature",
+    "tls_feature_count",
+    "has_name_constraints",
+    "certificate_version",
+    "public_key_algorithm",
+    "signature_hash_algorithm",
+    "signature_algorithm_family",
+    "issuer_organization",
+    "issuer_country"
+  ],
+  "input": {
+    "path": "/mnt/ml-data/ctarchive_trustasia_log2025b/derived/richcert_v2_exploratory_split_safe.parquet",
+    "rows": 7010,
+    "sha256": "725faab4cb3825870941114f0cc18f10f62dbddb2043435732cb272b9b65669d"
+  },
+  "output": {
+    "bytes": 4056588,
+    "path": "/mnt/ml-data/ct_phishing_release_staging/ct_phishing_trustasia_ab_v2.csv",
+    "rows": 7010,
+    "sha256": "70144e689952f72de583337c374c31057b47281351fd2a61b7047221c1d527dd"
+  },
+  "release_schema_version": "ct_phishing_standard_csv_v1",
+  "rows_by_split_and_label": {
+    "test": {
+      "benign": 206,
+      "phish": 331
+    },
+    "train": {
+      "benign": 4584,
+      "phish": 622
+    },
+    "validation": {
+      "benign": 1058,
+      "phish": 209
+    }
+  },
+  "safety_note": "Complete post-deduplication, post-leakage-purge rows only. No raw URLs, HTML, targets, raw DNS-SAN lists, certificate bytes, serial numbers, public keys, or extension values are included.",
+  "split_manifest": {
+    "path": "/mnt/ml-data/ctarchive_trustasia_log2025b/derived/richcert_v2_exploratory_split_manifest.json",
+    "sha256": "6446b63d83afe2e9ad038884d6a9c4784b61953b9f9429786765a8c204039c2a"
+  }
+}
