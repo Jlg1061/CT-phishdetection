@@ -7,17 +7,29 @@ deduplicates records, purges certificate/domain leakage across chronological
 splits, and writes the fixed 64-column CSV. Unmatched CT names are never
 treated as benign.
 
+## Included final release
+
+`releases/ct_phishing_records_final_v1.csv` is the final audited dataset for
+this project. It has 15,518 rows and 64 columns: 12,375 benign and 3,143
+phishing examples. Its chronological train/validation/test split contains no
+cross-split certificate-fingerprint or PSL registrable-domain groups. The
+companion manifest records the input and output checksums, schema, and
+split-by-label counts. This is the dataset to use for the project's final
+experiments.
+
+Like the preliminary release, it contains labeled hostnames for reproducible
+hostname feature experiments, but excludes raw URLs, HTML, target-brand
+annotations, certificate bytes, public keys, serial numbers, raw DNS-SAN
+lists, and extension values.
+
 ## Included preliminary release
 
 `releases/ct_phishing_trustasia_ab_v2.csv` is the frozen preliminary dataset
 used for the project's exploratory benchmark: 7,010 post-deduplication,
 post-leakage-purge rows (5,848 benign; 1,162 phishing) with 64 columns. Its
 companion manifest records the exact input checksum, output checksum, schema,
-and split-by-label counts. This is an exploratory release, not the final
-expanded dataset. It contains labeled hostnames for reproducible hostname
-feature experiments, but excludes raw URLs, HTML, target-brand annotations,
-certificate bytes, public keys, serial numbers, raw DNS-SAN lists, and
-extension values.
+and split-by-label counts. This is an exploratory benchmark retained for
+comparison; use the final release above for the project results.
 
 ## Quick start
 

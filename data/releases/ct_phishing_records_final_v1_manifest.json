@@ -1,0 +1,100 @@
+{
+  "cohort_version": "ctph_2025-09-05_to_2025-11-05_30d_full_v1",
+  "columns": [
+    "record_id",
+    "dataset_split",
+    "cohort_version",
+    "hostname",
+    "label",
+    "collection_date",
+    "ct_timestamp",
+    "certificate_not_before",
+    "certificate_not_after",
+    "issuer",
+    "san_count",
+    "is_wildcard",
+    "certificate_fingerprint",
+    "source_log",
+    "source_archive",
+    "log_entry_id",
+    "entry_type",
+    "hostname_length",
+    "digit_count",
+    "hyphen_count",
+    "character_entropy",
+    "subdomain_depth",
+    "metadata_schema_version",
+    "certificate_extension_count",
+    "issuer_attribute_count",
+    "public_key_size",
+    "san_wildcard_count",
+    "san_idna_count",
+    "san_distinct_final_label_count",
+    "san_max_length",
+    "san_mean_length",
+    "san_max_subdomain_depth",
+    "san_mean_subdomain_depth",
+    "san_max_entropy",
+    "san_mean_entropy",
+    "has_basic_constraints",
+    "basic_constraints_ca",
+    "has_key_usage",
+    "key_usage_digital_signature",
+    "key_usage_key_encipherment",
+    "key_usage_key_agreement",
+    "has_extended_key_usage",
+    "extended_key_usage_count",
+    "eku_server_auth",
+    "eku_client_auth",
+    "eku_code_signing",
+    "has_authority_key_identifier",
+    "has_subject_key_identifier",
+    "has_certificate_policies",
+    "certificate_policy_count",
+    "has_crl_distribution_points",
+    "crl_distribution_point_count",
+    "has_authority_information_access",
+    "aia_ocsp_count",
+    "aia_ca_issuers_count",
+    "has_tls_feature",
+    "tls_feature_count",
+    "has_name_constraints",
+    "certificate_version",
+    "public_key_algorithm",
+    "signature_hash_algorithm",
+    "signature_algorithm_family",
+    "issuer_organization",
+    "issuer_country"
+  ],
+  "input": {
+    "path": "/mnt/ml-data/ctarchive_sectigo_elephant2025h2/derived/richcert_v3_exploratory_split_safe.parquet",
+    "rows": 15518,
+    "sha256": "e24ea0f86fd90f039f257ce23bee79dff86d6f92c48a7ba42c0d0d5ede7971d2"
+  },
+  "output": {
+    "bytes": 9309266,
+    "path": "/mnt/ml-data/ct_phishing_final_release/ct_phishing_records.csv",
+    "rows": 15518,
+    "sha256": "51ec3caab7f582d1076faac30206121385b2151909c12183a7973bf14f49af24"
+  },
+  "release_schema_version": "ct_phishing_standard_csv_v1",
+  "rows_by_split_and_label": {
+    "test": {
+      "benign": 1033,
+      "phish": 1381
+    },
+    "train": {
+      "benign": 8147,
+      "phish": 1138
+    },
+    "validation": {
+      "benign": 3195,
+      "phish": 624
+    }
+  },
+  "safety_note": "Complete post-deduplication, post-leakage-purge rows only. No raw URLs, HTML, targets, raw DNS-SAN lists, certificate bytes, serial numbers, public keys, or extension values are included.",
+  "split_manifest": {
+    "path": "/mnt/ml-data/ctarchive_sectigo_elephant2025h2/derived/richcert_v3_exploratory_split_manifest.json",
+    "sha256": "e8e3c81b36870dd8d88508dcb65181dc5a25c8f67de345a568220a7495cde0a2"
+  }
+}
