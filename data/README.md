@@ -22,6 +22,20 @@ hostname feature experiments, but excludes raw URLs, HTML, target-brand
 annotations, certificate bytes, public keys, serial numbers, raw DNS-SAN
 lists, and extension values.
 
+## Combined 2024--2025 data inventory
+
+`releases/ct_phishing_records_combined_2024_2025_v1.csv` is a lossless
+concatenation of the finalized 2024 and 2025 releases: 25,502 rows in the same
+64-column schema (20,864 benign and 4,638 phishing). Its companion manifest
+pins both input checksums and the combined output checksum. `cohort_version`
+identifies the source cohort for every row.
+
+The retained `dataset_split` value is local to its source cohort; this file is
+an all-rows data inventory, not a new globally chronological evaluation set.
+Before using both periods in one model evaluation, create a new temporal split
+and repeat the certificate-fingerprint and PSL registrable-domain leakage
+audit across the complete combined cohort.
+
 ## Included preliminary release
 
 `releases/ct_phishing_trustasia_ab_v2.csv` is the frozen preliminary dataset
