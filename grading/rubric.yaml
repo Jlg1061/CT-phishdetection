@@ -1,0 +1,61 @@
+# Machine-readable grading rubric for CSEC 520/620 projects.
+# Weights sum to 100. `check` = auto (verified by grade.py), agent (LLM judgment),
+# or both (auto evidence + agent judgment).
+version: 1
+total_points: 100
+
+criteria:
+  - id: reproducibility
+    title: One-command reproducibility
+    max_points: 25
+    check: both
+    guidance: >
+      `make reproduce` (or `python -m src.train --config config.yaml`) runs from a
+      clean environment and writes results/metrics.json plus figures. Full marks only
+      if it completes without manual intervention. See auto_report checks:
+      reproduce_runs, metrics_present.
+
+  - id: evaluation_validity
+    title: Evaluation validity & metrics
+    max_points: 20
+    check: both
+    guidance: >
+      Reports precision, recall, F1, and ROC-AUC (not just accuracy). No data leakage
+      (scaling/feature-fitting done on train only; no test data in training). Sensible
+      train/test split. See auto checks: metrics_present, leakage_scan.
+
+  - id: implementation
+    title: Implementation correctness
+    max_points: 20
+    check: both
+    guidance: >
+      Code is correct and matches the described approach; from-scratch requirements
+      (if any) are genuinely implemented, not library calls. Smoke tests pass.
+
+  - id: code_quality
+    title: Code quality & organization
+    max_points: 10
+    check: both
+    guidance: >
+      Readable, organized, config-driven (no hard-coded magic numbers), no dead code,
+      passes lint. Data and results are git-ignored, not committed.
+
+  - id: report
+    title: Report quality (IEEE format)
+    max_points: 20
+    check: agent
+    guidance: >
+      IEEE-format report with all required sections (abstract, intro, literature review,
+      implementation, data analysis & performance discussion, conclusion, references).
+      Results in the report MATCH results/metrics.json. Clear, well-supported discussion.
+
+  - id: security_relevance
+    title: Security relevance & originality
+    max_points: 5
+    check: agent
+    guidance: >
+      Addresses a genuine cybersecurity problem; shows originality or thoughtful
+      extension beyond a tutorial.
+
+# 620 (graduate) students: apply the research-paper track expectations more strictly
+# under `report` and `security_relevance` (literature depth, reproduction/extension).

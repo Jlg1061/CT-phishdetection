@@ -1,0 +1,24 @@
+# Experiment configuration — edit this, not the code, to change a run.
+seed: 42
+
+data:
+  source: csv               # "synthetic" (default) or "csv"
+  csv_path: data/releases/ct_phishing_records_final_v1.csv
+  target: label             # target column name when source == csv
+  drop_columns: ["record_id", "dataset_split", "collection_date", "cohort_version", "collection_date"]         # CSV columns to exclude from features
+  n_samples: 2000           # synthetic only
+  n_features: 20            # synthetic only
+  test_size: 0.2
+
+model:
+  hidden_sizes: [64, 32]
+  dropout: 0.1
+
+train:
+  epochs: 30
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 0.0001
+
+output:
+  dir: results
