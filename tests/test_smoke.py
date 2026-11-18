@@ -5,6 +5,11 @@ import pandas as pd
 
 from src.data import load_data
 from src.evaluate import compute_metrics
+from src.train import (
+    CLASSICAL_MODELS,
+    build_classical_model,
+    train_all_classical_models,
+)
 
 CFG = {
     "seed": 0,
@@ -79,3 +84,62 @@ def test_csv_encodes_string_labels(tmp_path):
     _, _, ytr, yte = load_data(cfg)
 
     assert set(np.unique(np.concatenate([ytr, yte]))) <= {0, 1}
+
+
+def test_build_classical_models():
+    for name in (
+        "logistic_regression",
+        "random_forest",
+        "svm",
+        "decision_tree",
+        "knn",
+        "naive_bayes",
+        "gradient_boosting",
+    ):
+        model = build_classical_model({"seed": 0, "model": {"type": name}})
+
+        assert model is not None
+
+
+def test_classical_models_ignore_custom_params():
+    forest = build_classical_model(
+        {
+            "seed": 0,
+            "model": {
+                "type": "random_forest",
+                "params": {"n_estimators": 200, "max_depth": 12},
+            },
+        }
+    )
+
+    assert forest.n_estimators == 100
+    assert forest.max_depth is None
+
+
+def test_classical_runs_all_models(tmp_path):
+    cfg = {
+        "seed": 0,
+        "model": {"type": "classical"},
+    }
+
+    Xtr, Xte, ytr, yte = load_data(
+        {
+            "seed": 0,
+            "data": {
+                "source": "synthetic",
+                "n_samples": 400,
+                "n_features": 10,
+                "test_size": 0.25,
+            },
+        }
+    )
+
+    all_metrics, best_model_name, best_metrics = train_all_classical_models(
+        cfg, Xtr, Xte, ytr, yte, str(tmp_path)
+    )
+
+    assert set(all_metrics) == set(CLASSICAL_MODELS)
+    assert best_model_name in CLASSICAL_MODELS
+    assert isinstance(best_metrics, dict)
+    assert set(best_metrics) >= {"accuracy", "precision", "recall", "f1", "roc_auc"}
+    assert len(list(tmp_path.glob("confusion_matrix_*.png"))) == len(CLASSICAL_MODELS)

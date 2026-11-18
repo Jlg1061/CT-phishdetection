@@ -28,4 +28,4 @@ lint:
 	$(PY) -m py_compile src/*.py tests/*.py
 
 clean:
-	rm -f results/*.png results/*.json results/*.pt
+	rm -f results/*.png results/*.json results/*.pt results/*.joblib

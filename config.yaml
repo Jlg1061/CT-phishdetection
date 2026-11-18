@@ -11,6 +11,8 @@ data:
   test_size: 0.2
 
 model:
+  type: classical           # classical, custom, logistic_regression, random_forest, svm,
+                            # decision_tree, knn, naive_bayes, gradient_boosting
   hidden_sizes: [64, 32]
   dropout: 0.1
 
